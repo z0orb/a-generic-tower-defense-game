@@ -5,9 +5,9 @@ namespace FinalProject {
         /// <summary>
         /// Variable we use when determining what tower to sell.
         /// </summary>
-        private Tower sellTarget;
+        private TowerClass sellTarget;
 
-        public SellClass(string imagePath, PointF startPos, float animationSpeed, float scaleFactor, float speed, Tower sellTarget)
+        public SellClass(string imagePath, PointF startPos, float animationSpeed, float scaleFactor, float speed, TowerClass sellTarget)
             : base(imagePath, startPos, animationSpeed, scaleFactor, speed) {
             this.sellTarget = sellTarget;
         }

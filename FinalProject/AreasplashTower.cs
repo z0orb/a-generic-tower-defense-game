@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 
 namespace FinalProject {
-    class AreasplashTower : Tower {
+    class AreasplashTower : TowerClass {
         private int splashRange;
 
         public int SplashRange {

@@ -57,31 +57,31 @@ namespace FinalProject {
         /// <param name="other"></param> 
         public override void OnCollision(IngameObjectTracker other) {
             // if the collided object is a Tower & And the other tower is placed & a click is detected & cursor is not placing a tower & the position is on gamefield
-            if ((other as Tower) != null && (other as Tower).Placed && click && !placing && GameWorldClass.MousePos.X < 520) {
+            if ((other as TowerClass) != null && (other as TowerClass).Placed && click && !placing && GameWorldClass.MousePos.X < 520) {
                 // if the colliede tower is not selected
-                if (!(other as Tower).Selected) {
+                if (!(other as TowerClass).Selected) {
                     // Removes selection from every other tower
                     foreach (IngameObjectTracker obj in GameWorldClass.Objects) {
-                        if ((obj as Tower) != null) {
-                            if ((obj as Tower).Placed && (obj as Tower).Selected) {
-                                (obj as Tower).OnDeselection();
+                        if ((obj as TowerClass) != null) {
+                            if ((obj as TowerClass).Placed && (obj as TowerClass).Selected) {
+                                (obj as TowerClass).OnDeselection();
                             }
                         }
                     }
 
                     // Add selected to collided tower
-                    (other as Tower).OnSelection();
+                    (other as TowerClass).OnSelection();
 
                 }
                 else {
                     // Remove selection from tower
-                    (other as Tower).OnDeselection();
+                    (other as TowerClass).OnDeselection();
                 }
             }
 
 
             // if collided object is a NormalTower
-            if ((other as Tower) != null) {
+            if ((other as TowerClass) != null) {
                 // if a click is detected & cursor is not placing & position is outside gamefield
                 if (click && !placing && GameWorldClass.MousePos.X > 540) {
                     if ((other as BasicTower) != null) {
@@ -100,19 +100,19 @@ namespace FinalProject {
                             GameWorldClass.NewObjects.Add(GameWorldClass.TowerToPlace);
                         }
                     }
-                    if ((other as SplashTower) != null) {
-                        if (GameWorldClass.Currency >= ((SplashTower)other).Price) {
+                    if ((other as AreasplashTower) != null) {
+                        if (GameWorldClass.Currency >= ((AreasplashTower)other).Price) {
                             // Adds a tower to the cursor for the player to place
                             placing = true;
-                            GameWorldClass.TowerToPlace = new SplashTower(@"sprites\towers\splashtower.png", new PointF(clickPos.X - 16, clickPos.Y - 16), 0, 1, 1, false, true, false);
+                            GameWorldClass.TowerToPlace = new AreasplashTower(@"sprites\towers\splashtower.png", new PointF(clickPos.X - 16, clickPos.Y - 16), 0, 1, 1, false, true, false);
                             GameWorldClass.NewObjects.Add(GameWorldClass.TowerToPlace);
                         }
                     }
-                    if ((other as SlowTower) != null) {
-                        if (GameWorldClass.Currency >= ((SlowTower)other).Price) {
+                    if ((other as SlowingTower) != null) {
+                        if (GameWorldClass.Currency >= ((SlowingTower)other).Price) {
                             // Adds a tower to the cursor for the player to place
                             placing = true;
-                            GameWorldClass.TowerToPlace = new SlowTower(@"sprites\towers\slowtower.png", new PointF(clickPos.X - 16, clickPos.Y - 16), 0, 1, 1, false, true, false);
+                            GameWorldClass.TowerToPlace = new SlowingTower(@"sprites\towers\slowtower.png", new PointF(clickPos.X - 16, clickPos.Y - 16), 0, 1, 1, false, true, false);
                             GameWorldClass.NewObjects.Add(GameWorldClass.TowerToPlace);
                         }
                     }
@@ -133,8 +133,8 @@ namespace FinalProject {
 
                     foreach (IngameObjectTracker obj in GameWorldClass.Objects) {
                         // Checks Tower in gameobjects to see if it's colliding with the tower being placed
-                        if ((obj as Tower) != null &&
-                            ((Tower)obj).Placed) {
+                        if ((obj as TowerClass) != null &&
+                            ((TowerClass)obj).Placed) {
                             // The rectangle of an already placed tower
                             RectangleF oldTowerCollision = obj.CollisionBox;
 
@@ -178,20 +178,20 @@ namespace FinalProject {
 
                             GameWorldClass.Currency -= ((AATower)other).Price;
                         }
-                        if ((other as SplashTower) != null) {
-                            GameWorldClass.NewObjects.Add(new SplashTower(@"sprites\towers\splashtower.png", new PointF(clickPos.X - 16, clickPos.Y - 16), 0, 1, 1000, true, false, false));
+                        if ((other as AreasplashTower) != null) {
+                            GameWorldClass.NewObjects.Add(new AreasplashTower(@"sprites\towers\splashtower.png", new PointF(clickPos.X - 16, clickPos.Y - 16), 0, 1, 1000, true, false, false));
 
-                            GameWorldClass.Currency -= ((SplashTower)other).Price;
+                            GameWorldClass.Currency -= ((AreasplashTower)other).Price;
 
                         }
-                        if ((other as SlowTower) != null) {
-                            GameWorldClass.NewObjects.Add(new SlowTower(@"sprites\towers\slowtower.png", new PointF(clickPos.X - 16, clickPos.Y - 16), 0, 1, 500, true, false, false));
+                        if ((other as SlowingTower) != null) {
+                            GameWorldClass.NewObjects.Add(new SlowingTower(@"sprites\towers\slowtower.png", new PointF(clickPos.X - 16, clickPos.Y - 16), 0, 1, 500, true, false, false));
 
-                            GameWorldClass.Currency -= ((SlowTower)other).Price;
+                            GameWorldClass.Currency -= ((SlowingTower)other).Price;
 
-                            foreach (SlowTower pTower in GameWorldClass.NewObjects) {
-                                if ((pTower as SlowTower) != null) {
-                                    ((SlowTower)pTower).Price = 16;
+                            foreach (SlowingTower pTower in GameWorldClass.NewObjects) {
+                                if ((pTower as SlowingTower) != null) {
+                                    ((SlowingTower)pTower).Price = 16;
                                 }
                             }
                         }
@@ -203,11 +203,11 @@ namespace FinalProject {
             }
 
             // if collided object is Upgradebutton
-            if ((other as Upgrade) != null) {
+            if ((other as UpgradeClass) != null) {
                 // if a click is detected & cursor is not placing & position is outside gamefield
                 if (click && !placing && GameWorldClass.MousePos.X > 540) {
                     // Upgrades tower if currency is high enough
-                    ((Upgrade)other).UpgradeTower();
+                    ((UpgradeClass)other).UpgradeTower();
 
                 }
                 if (click && placing && GameWorldClass.MousePos.X > 540) {
@@ -219,14 +219,14 @@ namespace FinalProject {
             }
 
             // if collided object is Sellbutton
-            if ((other as Sell) != null) {
+            if ((other as SellClass) != null) {
                 // if a click is detected & cursor is not placing & position is outside gamefield
                 if (click && !placing && GameWorldClass.MousePos.X > 540) {
                     // Adds a tower to the cursor for the player to place
-                    ((Sell)other).SellTower();
+                    ((SellClass)other).SellTower();
 
                     foreach (IngameObjectTracker obj in GameWorldClass.Objects) {
-                        if ((obj as Upgrade) != null || (obj as Sell) != null) {
+                        if ((obj as UpgradeClass) != null || (obj as SellClass) != null) {
                             GameWorldClass.RemoveObjects.Add(obj);
                         }
                     }

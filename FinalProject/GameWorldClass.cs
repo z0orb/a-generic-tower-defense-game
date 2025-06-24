@@ -25,7 +25,7 @@ namespace FinalProject {
         /// <summary>
         /// Class to keep track of Waves
         /// </summary> 
-        private static Wave waveKeeper;                                     // Keeps track of spawning waves
+        private static WaveManager waveKeeper;                                     // Keeps track of spawning waves
 
         /// <summary>
         /// Checkpoints checker for each Monster.
@@ -48,7 +48,7 @@ namespace FinalProject {
         /// Position of mouse cursor and the cursor object.
         /// </summary> 
         private static Point mousePos;
-        private PlayerCursor cursor;
+        private MouseHandler cursor;
 
         /// <summary>
         /// Variables for calculating FPS.
@@ -81,7 +81,7 @@ namespace FinalProject {
             get { return GameWorldClass.towerToPlace; }
             set { GameWorldClass.towerToPlace = value; }
         }
-        public static Wave WaveKeeper {
+        public static WaveManager WaveKeeper {
             get { return GameWorldClass.waveKeeper; }
             set { GameWorldClass.waveKeeper = value; }
         }
@@ -131,11 +131,11 @@ namespace FinalProject {
             backgroundImage = Image.FromFile(@"sprites\background\background.png");
 
             // Creates the wave object out of users reach & adds it to objects list
-            waveKeeper = new Wave(@"sprites\cursor\pointer.png", new PointF(-1000, -1000), 0, 1, 1);
+            waveKeeper = new WaveManager(@"sprites\cursor\pointer.png", new PointF(-1000, -1000), 0, 1, 1);
             objects.Add(waveKeeper);
 
             // Creates the player cursor & adds it to objects list
-            cursor = new PlayerCursor(@"sprites\cursor\pointer.png", MousePos, 1, 1, 1);
+            cursor = new MouseHandler(@"sprites\cursor\pointer.png", MousePos, 1, 1, 1);
             objects.Add(cursor);
 
             // Creates the checkpoints for the monster to move to
@@ -161,10 +161,10 @@ namespace FinalProject {
 
             // Creates buttons for Towers
             // |        ObjectName     |Sprites                            |Position           |ASpd|SclFac|Spd|Placed|beingPlaced|Selected|
-            objects.Add(new NormalTower(@"sprites\towers\normaltower.png", new PointF(571f, 104f), 0, 1, 1, false, false, false));
+            objects.Add(new BasicTower(@"sprites\towers\normaltower.png", new PointF(571f, 104f), 0, 1, 1, false, false, false));
             objects.Add(new AATower(@"sprites\towers\airtower.png", new PointF(672f, 104f), 0, 1, 1, false, false, false));
-            objects.Add(new SlowTower(@"sprites\towers\slowtower.png", new PointF(571f, 190f), 0, 1, 1, false, false, false));
-            objects.Add(new SplashTower(@"sprites\towers\splashtower.png", new PointF(672f, 190f), 0, 1, 1, false, false, false));
+            objects.Add(new SlowingTower(@"sprites\towers\slowtower.png", new PointF(571f, 190f), 0, 1, 1, false, false, false));
+            objects.Add(new AreasplashTower(@"sprites\towers\splashtower.png", new PointF(672f, 190f), 0, 1, 1, false, false, false));
 
             // Sets endtime to prepare for gameloops FPS calculation
             endTime = DateTime.Now;
