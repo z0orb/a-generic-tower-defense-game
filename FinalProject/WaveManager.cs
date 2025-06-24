@@ -173,27 +173,27 @@ namespace FinalProject {
             Font font = new Font("Arial", 12);
 
             if (waveCounter == 0) {
-                dc.DrawString("First creep type: Normal", font, Brushes.Black, 580, 540);
+                dc.DrawString("First enemy type: Slime", font, Brushes.Black, 580, 540);
             }
             if (waveCounter == 1) {
-                dc.DrawString("Creep type: Normal", font, Brushes.Black, 561, 53);
-                dc.DrawString("Next creep type: Fast", font, Brushes.Black, 580, 540);
+                dc.DrawString("Enemy type: Slime", font, Brushes.Black, 561, 53);
+                dc.DrawString("Next enemy type: Wisp", font, Brushes.Black, 580, 540);
             }
             if (waveCounter == 2) {
-                dc.DrawString("Creep type: Fast", font, Brushes.Black, 561, 53);
-                dc.DrawString("Next creep type: Air", font, Brushes.Black, 580, 540);
+                dc.DrawString("Enemy type: Wisp", font, Brushes.Black, 561, 53);
+                dc.DrawString("Next enemy type: Bat", font, Brushes.Black, 580, 540);
             }
             if (waveCounter == 3) {
-                dc.DrawString("Creep type: Air", font, Brushes.Black, 561, 53);
-                dc.DrawString("Next creep type: Immune", font, Brushes.Black, 580, 540);
+                dc.DrawString("Enemy type: Bat", font, Brushes.Black, 561, 53);
+                dc.DrawString("Next enemy type: Golem", font, Brushes.Black, 580, 540);
             }
             if (waveCounter == 4) {
-                dc.DrawString("Creep type: Immune", font, Brushes.Black, 561, 53);
-                dc.DrawString("Next creep type: Boss", font, Brushes.Black, 580, 540);
+                dc.DrawString("Enemy type: Golem", font, Brushes.Black, 561, 53);
+                dc.DrawString("Next enemy type: Demon", font, Brushes.Black, 580, 540);
             }
             if (waveCounter == 5) {
-                dc.DrawString("Creep type: Boss", font, Brushes.Black, 561, 53);
-                dc.DrawString("Next creep type: Normal", font, Brushes.Black, 580, 540);
+                dc.DrawString("Enemy type: Demon", font, Brushes.Black, 561, 53);
+                dc.DrawString("Next enemy type: Slime", font, Brushes.Black, 580, 540);
             }
 
             base.Draw(dc);
@@ -205,7 +205,7 @@ namespace FinalProject {
 
             // DEBUG STUFF!
             // FPS
-            dc.DrawString("BaseHP: " + monsterHealth.ToString(), f, Brushes.Red, 0, 300);
+            //dc.DrawString("BaseHP: " + monsterHealth.ToString(), f, Brushes.Red, 0, 300);
 #endif
         }
     }
