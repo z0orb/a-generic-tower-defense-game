@@ -339,15 +339,15 @@ namespace FinalProject {
 #if DEBUG
             // DEBUG STUFF!
             // FPS
-            dc.DrawString("Fps: " + currentFPS.ToString(), font, Brushes.Red, 0, 25);
+            //dc.DrawString("Fps: " + currentFPS.ToString(), font, Brushes.Red, 0, 25);
 
             // Total Objects
-            dc.DrawString("TotalObjects: " + (objects.Count).ToString(), font, Brushes.Gold, 0, 50);
+            //dc.DrawString("TotalObjects: " + (objects.Count).ToString(), font, Brushes.Gold, 0, 50);
 
             Pen p = new Pen(Color.Red, 2);
 
             // Draws checkpoint line
-            dc.DrawLines(p, GameWorldClass.Checkpoints);
+            //dc.DrawLines(p, GameWorldClass.Checkpoints);
 
 #endif
             // Calls backbuffer to render & clears the displaywindow
