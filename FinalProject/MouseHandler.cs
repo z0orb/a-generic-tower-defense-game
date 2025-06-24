@@ -250,8 +250,8 @@ namespace FinalProject {
             // DEBUG STUFF!!!!
 
             // Draws out the cursor position
-            Font f = new Font("Arial", 25);
-            dc.DrawString("PointerPos: " + (Position.X + " : " + Position.Y), f, Brushes.Gold, 160, 0);
+            //Font f = new Font("Arial", 25);
+            //dc.DrawString("PointerPos: " + (Position.X + " : " + Position.Y), f, Brushes.Gold, 160, 0);
 #endif
 
             // Runs base.Draw

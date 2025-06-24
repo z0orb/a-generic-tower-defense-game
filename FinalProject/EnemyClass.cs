@@ -189,7 +189,7 @@ namespace FinalProject {
             // DEBUG STUFF!
 
             // Draws monsters collisionbox
-            dc.DrawRectangle(p, CollisionBox.X, CollisionBox.Y, CollisionBox.Width, CollisionBox.Height);
+            //dc.DrawRectangle(p, CollisionBox.X, CollisionBox.Y, CollisionBox.Width, CollisionBox.Height);
 
 #endif
 
