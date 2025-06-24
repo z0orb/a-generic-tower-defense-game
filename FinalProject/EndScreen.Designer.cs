@@ -2,15 +2,11 @@
 {
     partial class EndScreen
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
+        //variable untuk designer form
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        //fungsi garbage cleanup
+        /// disposing = true if butuh dihapus, else false
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -22,17 +18,13 @@
 
         #region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
+        //he rek ojo diedit amoh ngko
         private void InitializeComponent()
         {
             this.btnBackMenu = new System.Windows.Forms.Button();
             this.SuspendLayout();
-            // 
-            // btnBackMenu
-            // 
+            
+            //bckmenu button
             this.btnBackMenu.BackColor = System.Drawing.Color.Transparent;
             this.btnBackMenu.BackgroundImage = global::FinalProject.Properties.Resources.backtomenu;
             this.btnBackMenu.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
@@ -47,9 +39,8 @@
             this.btnBackMenu.TabIndex = 0;
             this.btnBackMenu.UseVisualStyleBackColor = false;
             this.btnBackMenu.Click += new System.EventHandler(this.btnBackMenu_Click);
-            // 
-            // EndScreen
-            // 
+            
+            //section endscreen
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::FinalProject.Properties.Resources.endbackground;
@@ -63,7 +54,6 @@
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.EndScreen_FormClosed);
             this.Load += new System.EventHandler(this.EndScreen_Load);
             this.ResumeLayout(false);
-
         }
 
         #endregion
