@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 
 namespace FinalProject {
-    class SlowingTower : Tower {
+    class SlowingTower : TowerClass {
         /// <summary>
         /// A value that defines the movement reduction when getting hit from the SlowTower projectile
         /// </summary>

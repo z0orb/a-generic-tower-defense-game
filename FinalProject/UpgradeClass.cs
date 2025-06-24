@@ -5,7 +5,7 @@ namespace FinalProject {
         /// <summary>
         /// Variable used when wanting to upgrade a tower.
         /// </summary>
-        private Tower upgradeTarget;
+        private TowerClass upgradeTarget;
 
         /// <summary>
         /// Sets the values for the different variables.
@@ -16,7 +16,7 @@ namespace FinalProject {
         /// <param name="scaleFactor">A factor to scale sprites</param>
         /// <param name="speed">The speed for which the tower shoots</param>
         /// <param name="upgradeTarget"></param>
-        public UpgradeClass(string imagePath, PointF startPos, float animationSpeed, float scaleFactor, float speed, Tower upgradeTarget)
+        public UpgradeClass(string imagePath, PointF startPos, float animationSpeed, float scaleFactor, float speed, TowerClass upgradeTarget)
             : base(imagePath, startPos, animationSpeed, scaleFactor, speed) {
             this.upgradeTarget = upgradeTarget;
         }
