@@ -1,49 +1,42 @@
 ﻿using System.Drawing;
 
-namespace FinalProject {
-    public class WaveManager : IngameObjectTracker {
-        /// <summary>
-        /// Variable for managing waves
-        /// </summary> 
+namespace FinalProject
+{
+    public class WaveManager : IngameObjectTracker
+    {
+        // Variable gae managing waves
         private int waveCounter;
         private int currentWave;
         private float difficulty;
         private float difficultyIncrease;
         private int monsterHealth;
 
-        /// <summary>
-        /// Currency Management
-        /// </summary> 
+        // currency management
         private bool earnInterest;
         private int interest;
 
-        /// <summary>
-        /// Variable for managing spawn
-        /// </summary> 
+        // variable gae atur spawn
         private bool spawning;
         private int spawnCounter;
         private float spawnAccumilator = 0.0f;
         private float spawnPerSec = 2f;
 
-        /// <summary>
-        /// Properties
-        /// </summary> 
-        public int CurrentWave {
+        // Properties
+        public int CurrentWave
+        {
             get { return currentWave; }
             set { currentWave = value; }
         }
 
-        /// <summary>
-        /// Constructor for the creep wave.
-        /// </summary>
-        /// <param name="imagePath">Gets the path of the creep images</param>
-        /// <param name="startPos">Wave position</param>
-        /// <param name="animationSpeed">The speed for animations</param>
-        /// <param name="scaleFactor">A factor to scale sprites</param>
-        /// <param name="speed">The speed for which the wave moves</param> 
+        // imagePath: Path untuk gambar creep
+        // startPos: Posisi wave
+        // animationSpeed: Kecepatan animasi
+        // scaleFactor: Faktor scaling sprite
+        // speed: Kecepatan pergerakan wave
         public WaveManager(string imagePath, PointF startPos, float animationSpeed, float scaleFactor, float speed)
-            : base(imagePath, startPos, animationSpeed, scaleFactor, speed) {
-            // Resets waves
+            : base(imagePath, startPos, animationSpeed, scaleFactor, speed)
+        {
+            // Reset waves
             waveCounter = 0;
             currentWave = 0;
             interest = 10;
@@ -51,35 +44,43 @@ namespace FinalProject {
             difficultyIncrease = 10;
         }
 
-        /// <summary>
-        /// Method to handle next wave
-        /// </summary> 
-        public void NextWave() {
-            if (!spawning) {
-                // Enables spawning
+        // Method untuk atur next wave
+        public void NextWave()
+        {
+            if (!spawning)
+            {
+                // spawning on
                 spawning = true;
 
-                // Checks to see if any monsters are still present from last wave
-                foreach (IngameObjectTracker obj in GameWorldClass.Objects) {
-                    if ((obj as EnemyClass) != null) {
+           
+                // cek klo masi ada monster yg masi hidup dari last wave
+                foreach (IngameObjectTracker obj in GameWorldClass.Objects)
+                {
+                    if ((obj as EnemyClass) != null)
+                    {
                         spawning = false;
                     }
                 }
 
-                if (spawning) {
-                    // if there is no cooldown, the next wave will begin to spawn in next update
-                    // Resets spawncounter
+                if (spawning)
+                {
+
+                    // jika gaada counter, next wave bakal lgsg mulai di update selanjutny
+                    // reset spawn counter untuk next wave
                     spawnCounter = 0;
 
                     earnInterest = true;
 
-                    // Checks if the wavecounter is higher than total waves
-                    if (waveCounter >= 5) {
+             
+                    // cek klo wave counter lebih tinggi dri total wave, jika iya reset counter
+                    if (waveCounter >= 5)
+                    {
                         // Resets waves
                         waveCounter = 0;
                     }
 
-                    // Adds to the currentWave and waveCounter
+                 
+                    // increment current wave and wave cointer
                     waveCounter++;
                     currentWave++;
 
@@ -90,25 +91,27 @@ namespace FinalProject {
             }
         }
 
-        /// <summary>
-        /// Update Method
-        /// </summary>
-        /// <param name="deltaTime"></param> 
-        public override void Update(float deltaTime) {
-            // Calculates with framerate how many monsters to spawn this update
+
+        // method update
+        public override void Update(float deltaTime)
+        {
+            
+            // hotung dengan framerate berapa monster yg bakal di spawn 
             spawnAccumilator += spawnPerSec * deltaTime;
             int toSpawn = (int)spawnAccumilator;
             spawnAccumilator -= (float)toSpawn;
 
-            // Runs the spawn loop
-            for (int i = 0; i < toSpawn && spawnCounter < 25 && spawning; i++) {
-                // Adds to the spawn for each loop
+            // loop spawn enemy smpe 25
+            for (int i = 0; i < toSpawn && spawnCounter < 25 && spawning; i++)
+            {
+          
                 spawnCounter++;
 
-                // Switch case to manage what wave to spawn
-                switch (waveCounter) {
+            
+                // wtoch case buat manage wave mana yg spawn
+                switch (waveCounter)
+                {
                     case 1:
-                        // |                ObjectName |Sprites                        |Position        |ASpd|SclFac|Health  |Spd |Gold drop                                  |Flying|Immune  |
                         GameWorldClass.NewObjects.Add(new EnemyClass(@"sprites\enemies\normalmob.png", new PointF(130, -40), 0, 1, monsterHealth, 100, 1 + (int)(difficultyIncrease * 0.04), false, false));
                         break;
                     case 2:
@@ -122,76 +125,85 @@ namespace FinalProject {
                         break;
                     case 5:
                         GameWorldClass.NewObjects.Add(new EnemyClass(@"sprites\enemies\bossmob.png", new PointF(130, -40), 0, 1, (monsterHealth * 8), 75, 10 + (int)(difficultyIncrease * 0.4), false, false));
-
-                        // Boss fix
                         spawnCounter = 25;
-
                         break;
                     default:
                         break;
                 }
             }
 
-            // Stops spawning when 25 monsters have spawned
-            if (spawnCounter >= 25) {
+        
+            // stop spawn pas udh ada 25 monster yg ke spawn tiap wave
+            if (spawnCounter >= 25)
+            {
                 spawning = false;
             }
 
-            if (earnInterest && !spawning) {
+            if (earnInterest && !spawning)
+            {
                 bool completionChecker = true;
 
-                // Checks to see if any monsters are still present from last wave
-                foreach (IngameObjectTracker obj in GameWorldClass.Objects) {
-                    if ((obj as EnemyClass) != null) {
+
+                // cek jika masi ada monster yg hidup dri last wave
+                foreach (IngameObjectTracker obj in GameWorldClass.Objects)
+                {
+                    if ((obj as EnemyClass) != null)
+                    {
                         completionChecker = false;
                         break;
                     }
                 }
-                foreach (IngameObjectTracker obj in GameWorldClass.NewObjects) {
-                    if ((obj as EnemyClass) != null) {
+                foreach (IngameObjectTracker obj in GameWorldClass.NewObjects)
+                {
+                    if ((obj as EnemyClass) != null)
+                    {
                         completionChecker = false;
                         break;
                     }
                 }
 
-                if (earnInterest && completionChecker) {
+                if (earnInterest && completionChecker)
+                {
                     GameWorldClass.Currency += interest + (int)(difficultyIncrease * 0.2);
-
                     earnInterest = false;
                 }
             }
 
-            // Runs base.Update
             base.Update(deltaTime);
         }
 
-        /// <summary>
-        /// Method for that draws the text that announces current and next creep wave
-        /// </summary>
-        /// <param name="dc"></param>
-        public override void Draw(Graphics dc) {
+       
+        // method gae gambar text yg show current and next creep wave
+        public override void Draw(Graphics dc)
+        {
             Font font = new Font("Arial", 12);
 
-            if (waveCounter == 0) {
+            if (waveCounter == 0)
+            {
                 dc.DrawString("First enemy type: Slime", font, Brushes.Black, 580, 540);
             }
-            if (waveCounter == 1) {
+            if (waveCounter == 1)
+            {
                 dc.DrawString("Enemy type: Slime", font, Brushes.Black, 561, 53);
                 dc.DrawString("Next enemy type: Wisp", font, Brushes.Black, 580, 540);
             }
-            if (waveCounter == 2) {
+            if (waveCounter == 2)
+            {
                 dc.DrawString("Enemy type: Wisp", font, Brushes.Black, 561, 53);
                 dc.DrawString("Next enemy type: Bat", font, Brushes.Black, 580, 540);
             }
-            if (waveCounter == 3) {
+            if (waveCounter == 3)
+            {
                 dc.DrawString("Enemy type: Bat", font, Brushes.Black, 561, 53);
                 dc.DrawString("Next enemy type: Golem", font, Brushes.Black, 580, 540);
             }
-            if (waveCounter == 4) {
+            if (waveCounter == 4)
+            {
                 dc.DrawString("Enemy type: Golem", font, Brushes.Black, 561, 53);
                 dc.DrawString("Next enemy type: Demon", font, Brushes.Black, 580, 540);
             }
-            if (waveCounter == 5) {
+            if (waveCounter == 5)
+            {
                 dc.DrawString("Enemy type: Demon", font, Brushes.Black, 561, 53);
                 dc.DrawString("Next enemy type: Slime", font, Brushes.Black, 580, 540);
             }
@@ -199,10 +211,6 @@ namespace FinalProject {
             base.Draw(dc);
 
 #if DEBUG
-
-            // Sets a font
-            Font f = new Font("Arial", 18);
-
             // DEBUG STUFF!
             // FPS
             //dc.DrawString("BaseHP: " + monsterHealth.ToString(), f, Brushes.Red, 0, 300);
