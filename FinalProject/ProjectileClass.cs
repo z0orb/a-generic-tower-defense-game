@@ -1,28 +1,21 @@
 ﻿using System;
 using System.Drawing;
 
-namespace FinalProject {
-    class ProjectileClass : IngameObjectTracker {
-        /// <summary>
-        /// Fields for the destination point of the projectiles, the distance between tower and targeted enemy and the difference between target x coordinate and tower x cooordinate. Same goes for y coordinates.
-        /// </summary>
+namespace FinalProject 
+{
+    class ProjectileClass : IngameObjectTracker 
+    {
+        // Ini isian buat tujuan peluru ditembakkan, jarak antara towernya sama musuh yang lagi ditarget, terus selisih antara koordinat X musuh sama koordinat X towernya. Buat koordinat Y juga sama caranya.
         private PointF startPos;
         private PointF destination;
         private float distance;
         private float xDif;
         private float yDif;
         
-        /// <summary>
-        /// Projectile constructor that takes the same arguments as the gameobject
-        /// </summary>
-        /// <param name="imagePath">Gets the path to a single sprite or to multiple sprites</param>
-        /// <param name="startPos">Projectile position</param>
-        /// <param name="animationSpeed">The speed for animations</param>
-        /// <param name="scaleFactor">A factor to scale sprites</param>
-        /// <param name="speed">The speed for which the projectiles travel</param>
-        /// <param name="destination">Where the projectile is supposed to land</param>
+
         public ProjectileClass(string imagePath, PointF startPos, float animationSpeed, float scaleFactor, float speed, PointF destination)
-            : base(imagePath, startPos, animationSpeed, scaleFactor, speed) {
+            : base(imagePath, startPos, animationSpeed, scaleFactor, speed) 
+        {
             position.X -= 8;
             position.Y -= 8;
 
@@ -45,19 +38,15 @@ namespace FinalProject {
             distance = (float)Math.Sqrt(xDif * xDif + yDif * yDif);
         }
 
-        /// <summary>
-        /// Method for the collision between projectile and what it collides with
-        /// </summary>
-        /// <param name="other"></param>
-        public override void OnCollision(IngameObjectTracker other) {
+        //method collision projecktile
+        public override void OnCollision(IngameObjectTracker other) 
+        {
 
         }
 
-        /// <summary>
-        /// Updates for projectile.
-        /// </summary>
-        /// <param name="deltaTime"></param>
-        public override void Update(float deltaTime) {
+        //projectile travel update
+        public override void Update(float deltaTime) 
+        {
             position.X += deltaTime * (speed * xDif / 150);
             position.Y += deltaTime * (speed * yDif / 150);
 
@@ -76,7 +65,8 @@ namespace FinalProject {
 
             float traveled = (float)Math.Sqrt(newDifX * newDifX + newDifY * newDifY);
 
-            if (traveled >= distance) {
+            if (traveled >= distance) 
+            {
                 GameWorldClass.RemoveObjects.Add(this);
             }
         }
